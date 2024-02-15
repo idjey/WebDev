@@ -1,0 +1,9 @@
+{
+    "webdav_url": "https://hjf-bdw-stage.lkcompliant.net/_webdav/Transformed_Data/@files/",
+    "local_folder_path": "test_files",
+    "log_folder": "logs",
+    "schedule_time": "01:22",
+    "transformation_scripts": [
+        "test_script\\transformation\\test.py"
+    ]
+}
