@@ -11,18 +11,19 @@ def get_credentials():
             "Environment variables for WEBDAV_USERNAME or WEBDAV_PASSWORD are not set.")
     return username, password
 
+import os
 
-def set_credentials():
-    """Prompt user for credentials and set them as environment variables."""
-    username = input("Enter your username: ")
-    # Hides the password input
-    password = getpass.getpass("Enter your password: ")
-
-    # Set environment variables
-    os.environ['WEBDAV_USERNAME'] = username
-    os.environ['WEBDAV_PASSWORD'] = password
-
-    print("Credentials set successfully.")
+def set_credentials_env():
+    """Prompt for WebDAV credentials and save them to a .env file."""
+    username = input("Enter WEBDAV_USERNAME: ")
+    password = input("Enter WEBDAV_PASSWORD: ")
+    
+    env_path = os.path.join(os.getcwd(), '.env')  # Adjust path as needed
+    with open(env_path, 'a') as env_file:  # 'a' to append to avoid overwriting existing content
+        env_file.write(f"WEBDAV_USERNAME={username}\n")
+        env_file.write(f"WEBDAV_PASSWORD={password}\n")
+    
+    print("Credentials saved to .env file.")
 
 
 # Optionally, you could include a condition to automatically prompt for credentials
