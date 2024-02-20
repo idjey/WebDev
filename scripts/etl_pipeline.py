@@ -32,7 +32,7 @@ def update_schedule_time(config_path, new_time_format='%H:%M'):
 
 # Update schedule time before loading configuration
 # Ensure this path is correct and consistent
-config_file_path = 'test_script/config.json'
+config_file_path = r'config.json'
 update_schedule_time(config_file_path)
 
 # Load configuration and set up logging
