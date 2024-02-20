@@ -1,6 +1,7 @@
 import os
 import getpass
 
+
 def get_credentials():
     """Retrieves WebDAV credentials from environment variables or .env file."""
     load_dotenv()  # Ensure dotenv is loaded here as well to check for .env credentials
@@ -11,17 +12,20 @@ def get_credentials():
         return None, None  # Return None to indicate missing credentials
     return username, password
 
+
 def set_credentials_env():
     """Prompt for WebDAV credentials and save them to a .env file."""
     username = input("Enter WEBDAV_USERNAME: ")
-    password = getpass.getpass("Enter WEBDAV_PASSWORD: ")  # Use getpass for secure password input
-    
-    env_path = os.path.join(os.getcwd(), '.env')  # Adjust path as needed
+    # Use getpass for secure password input
+    password = getpass.getpass("Enter WEBDAV_PASSWORD: ")
+
+    env_path = os.path.join(os.getcwd(), '.env') 
     with open(env_path, 'a') as env_file:  # 'a' to append to avoid overwriting existing content
         env_file.write(f"WEBDAV_USERNAME={username}\n")
         env_file.write(f"WEBDAV_PASSWORD={password}\n")
-    
+
     print("Credentials saved to .env file.")
+
 
 def load_dotenv():
     """Load .env file to environment variables if it exists."""
@@ -30,10 +34,11 @@ def load_dotenv():
     if os.path.exists(dotenv_path):
         load_dotenv(dotenv_path)
 
+
 if __name__ == "__main__":
-    load_dotenv()  # Ensure .env is loaded first
+    load_dotenv() 
     username, password = get_credentials()
     if not username or not password:
         set_credentials_env()
     else:
-        print("Credentials are already set.")
+        print("Credentials already set.")
