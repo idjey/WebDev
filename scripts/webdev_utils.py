@@ -3,15 +3,15 @@ import requests
 from time import sleep
 import logging
 from urllib.parse import urljoin
-# Use centralized credential management
 from secure_credentials import get_credentials
-from config import config  # Assuming SSL cert path and other configs are here
+from config import config
 from logging_config import setup_logging  # Centralized logging configuration
 from dotenv import load_dotenv
 
-load_dotenv()
+custom_certificate_path = r'C:\Users\dkanjaria\Downloads\ZscalerRootCertificate-2048-SHA256.crt'
 
-setup_logging()  # Initialize logging based on centralized configuration
+load_dotenv()
+setup_logging()
 
 
 def file_hash(file_path):
@@ -35,9 +35,9 @@ def file_changed(file_path, last_modified_times, file_hashes):
     return False
 
 
-def upload_to_webdav(webdav_url, local_folder_path, delay_seconds=60):
+def upload_to_webdev(webdav_url, local_folder_path, delay_seconds=60):
     """Uploads modified files to WebDAV, with improved error handling and logging."""
-    credentials = get_credentials()  # Retrieve credentials at the point of use
+    credentials = get_credentials()
     files = os.listdir(local_folder_path)
     last_modified_times = {}
     file_hashes = {}
@@ -50,21 +50,20 @@ def upload_to_webdav(webdav_url, local_folder_path, delay_seconds=60):
                     upload_url = urljoin(
                         webdav_url, os.path.basename(file_path))
                     response = requests.put(
-                        upload_url, data=f, auth=credentials, verify=False )#config['custom_certificate_path'])
-                    response.raise_for_status()  # Ensures HTTP errors are caught
+                        upload_url, data=f, auth=credentials, verify=custom_certificate_path)
+                    response.raise_for_status()  # Find and ensure HTTP errors are caught
                     logging.info(f"Successfully uploaded {file}")
             except requests.exceptions.RequestException as e:  # Catches all HTTP-related exceptions
                 logging.error(f"Failed to upload {file}. Error: {e}")
             finally:
-                # Avoids overloading the server with rapid uploads
                 sleep(delay_seconds)
 
 
 if __name__ == "__main__":
     try:
-        setup_logging()  # Ensure logging is configured at the start
+        setup_logging()
         webdav_url = config['webdav_url']
         local_folder_path = config['local_folder_path']
-        upload_to_webdav(webdav_url, local_folder_path)
+        upload_to_webdev(webdav_url, local_folder_path)
     except Exception as e:
         logging.error(f"Failed in main execution: {e}")
