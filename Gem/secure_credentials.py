@@ -4,6 +4,66 @@ import netrc
 
 NETRC_FILE = "_netrc"
 
+# Checks if the _netrc file exists in the user's home directory, if not then create _netrc file in user's home directory
+# Ask user to enter credentials and save them to _netrc file
+
+
+def check_and_set_netrc_file():
+    return os.path.exists(os.path.join(os.path.expanduser("~"), NETRC_FILE))
+
+
+if not check_and_set_netrc_file():
+    netrc_file = netrc.netrc(os.path.join(os.path.expanduser("~"), NETRC_FILE))
+    username = input("Enter USERNAME: ")
+    password = getpass.getpass("Enter PASSWORD: ")
+    apitoken = getpass.getpass("Enter API TOKEN: ")
+    netrc_file.add_machine(
+        "https://hjf-bdw-stage.lkcompliant.net/", username, password, apitoken)
+    print("Credentials saved to _netrc file.")
+
+# Check if the user already exists in the _netrc file
+    if username in netrc_file.hosts:
+        print("User already exists in _netrc file.")
+    else:
+        print("Enter your credentials")
+        username = input("Enter USERNAME: ")
+        password = getpass.getpass("Enter PASSWORD: ")
+        apitoken = getpass.getpass("Enter API TOKEN: ")
+        netrc_file.add_machine(
+            "https://hjf-bdw-stage.lkcompliant.net/", username, password, apitoken)
+        print("Credentials saved to _netrc file.")
+
+
+def get_credentials():
+    if check_and_set_netrc_file():
+        username, _, password = netrc.netrc(os.path.join(
+            os.path.expanduser("~"), NETRC_FILE)).authenticators("https://hjf-bdw-stage.lkcompliant.net/")
+        return username, password
+    else:
+        print("No _netrc file found.")
+        return None, None
+
+
+
+if __name__ == "__main__":
+    check_and_set_netrc_file()
+    username, password = get_credentials()
+    print(f"Username: {username}")
+    print(f"Machine: {NETRC_FILE}")
+    print(f"Path: {os.path.join(os.path.expanduser('~'), NETRC_FILE)}")
+    print(f"File exists: {check_and_set_netrc_file()}")
+
+
+
+
+
+##########################
+import os
+import getpass
+import netrc
+
+NETRC_FILE = "_netrc"
+
 
 def check_netrc_file():
     """Checks if the _netrc file exists in the user's home directory."""
