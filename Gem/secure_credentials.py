@@ -33,6 +33,41 @@ def get_credentials():
         print("No _netrc file found.")
     return None, None
 
+def update_credentials():
+    """Updates credentials in the _netrc file."""
+    netrc_path = os.path.join(os.path.expanduser("~"), NETRC_FILE)
+    if os.path.exists(netrc_path):
+        try:
+            netrc_file = netrc.netrc(netrc_path)
+            if "https://hjf-bdw-stage.lkcompliant.net/" in netrc_file.hosts:
+                username = input("Enter new USERNAME: ")
+                password = getpass.getpass("Enter new PASSWORD: ")
+                apitoken = getpass.getpass("Enter new API TOKEN: ")
+                netrc_file.add_machine("https://hjf-bdw-stage.lkcompliant.net/", username, password, apitoken)
+                print("Credentials updated in _netrc file.")
+            else:
+                print("No existing credentials found for the specified machine.")
+        except Exception as e:
+            print(f"Error updating credentials in _netrc file: {e}")
+    else:
+        print("No _netrc file found.")
+
+def delete_credentials():
+    """Deletes credentials for the specified machine from the _netrc file."""
+    netrc_path = os.path.join(os.path.expanduser("~"), NETRC_FILE)
+    if os.path.exists(netrc_path):
+        try:
+            netrc_file = netrc.netrc(netrc_path)
+            if "https://hjf-bdw-stage.lkcompliant.net/" in netrc_file.hosts:
+                del netrc_file.hosts["https://hjf-bdw-stage.lkcompliant.net/"]
+                print("Credentials deleted from _netrc file.")
+            else:
+                print("No existing credentials found for the specified machine.")
+        except Exception as e:
+            print(f"Error deleting credentials from _netrc file: {e}")
+    else:
+        print("No _netrc file found.")
+
 if __name__ == "__main__":
     check_and_set_netrc_file()
     username, password = get_credentials()
@@ -40,6 +75,7 @@ if __name__ == "__main__":
     print(f"Machine: {NETRC_FILE}")
     print(f"Path: {os.path.join(os.path.expanduser('~'), NETRC_FILE)}")
     print(f"File exists: {os.path.exists(os.path.join(os.path.expanduser('~'), NETRC_FILE))}")
+
 
 
 
