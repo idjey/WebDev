@@ -4,46 +4,34 @@ import netrc
 
 NETRC_FILE = "_netrc"
 
-# Checks if the _netrc file exists in the user's home directory, if not then create _netrc file in user's home directory
-# Ask user to enter credentials and save them to _netrc file
-
-
 def check_and_set_netrc_file():
-    return os.path.exists(os.path.join(os.path.expanduser("~"), NETRC_FILE))
-
-
-if not check_and_set_netrc_file():
-    netrc_file = netrc.netrc(os.path.join(os.path.expanduser("~"), NETRC_FILE))
-    username = input("Enter USERNAME: ")
-    password = getpass.getpass("Enter PASSWORD: ")
-    apitoken = getpass.getpass("Enter API TOKEN: ")
-    netrc_file.add_machine(
-        "https://hjf-bdw-stage.lkcompliant.net/", username, password, apitoken)
-    print("Credentials saved to _netrc file.")
-
-# Check if the user already exists in the _netrc file
-    if username in netrc_file.hosts:
-        print("User already exists in _netrc file.")
-    else:
-        print("Enter your credentials")
-        username = input("Enter USERNAME: ")
-        password = getpass.getpass("Enter PASSWORD: ")
-        apitoken = getpass.getpass("Enter API TOKEN: ")
-        netrc_file.add_machine(
-            "https://hjf-bdw-stage.lkcompliant.net/", username, password, apitoken)
-        print("Credentials saved to _netrc file.")
-
+    """Checks if the _netrc file exists in the user's home directory, if not then creates it."""
+    netrc_path = os.path.join(os.path.expanduser("~"), NETRC_FILE)
+    if not os.path.exists(netrc_path):
+        print("No _netrc file found. Creating one.")
+        try:
+            netrc_file = netrc.netrc(netrc_path)
+            username = input("Enter USERNAME: ")
+            password = getpass.getpass("Enter PASSWORD: ")
+            apitoken = getpass.getpass("Enter API TOKEN: ")
+            netrc_file.add_machine("https://hjf-bdw-stage.lkcompliant.net/", username, password, apitoken)
+            print("Credentials saved to _netrc file.")
+        except Exception as e:
+            print(f"Error creating _netrc file: {e}")
 
 def get_credentials():
-    if check_and_set_netrc_file():
-        username, _, password = netrc.netrc(os.path.join(
-            os.path.expanduser("~"), NETRC_FILE)).authenticators("https://hjf-bdw-stage.lkcompliant.net/")
-        return username, password
+    """Retrieves credentials from the _netrc file."""
+    netrc_path = os.path.join(os.path.expanduser("~"), NETRC_FILE)
+    if os.path.exists(netrc_path):
+        try:
+            netrc_file = netrc.netrc(netrc_path)
+            username, _, password = netrc_file.authenticators("https://hjf-bdw-stage.lkcompliant.net/")
+            return username, password
+        except Exception as e:
+            print(f"Error retrieving credentials from _netrc file: {e}")
     else:
         print("No _netrc file found.")
-        return None, None
-
-
+    return None, None
 
 if __name__ == "__main__":
     check_and_set_netrc_file()
@@ -51,9 +39,7 @@ if __name__ == "__main__":
     print(f"Username: {username}")
     print(f"Machine: {NETRC_FILE}")
     print(f"Path: {os.path.join(os.path.expanduser('~'), NETRC_FILE)}")
-    print(f"File exists: {check_and_set_netrc_file()}")
-
-
+    print(f"File exists: {os.path.exists(os.path.join(os.path.expanduser('~'), NETRC_FILE))}")
 
 
 
