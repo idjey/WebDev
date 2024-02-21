@@ -15,7 +15,10 @@ def main(args):
         set_credentials_netrc()
     elif args.upload:
         logger.info("Uploading files to WebDev")
-        # Replace with your WebDAV URL
+        username, password = get_credentials()
+        if username is None or password is None:
+            print("No _netrc file found. Please enter credentials.")
+            return
         webdav_url = "https://hjf-bdw-stage.lkcompliant.net/_webdav/Transformed_Data/@files/"
         local_folder_path = "test_files"  # Replace with your local folder path
         upload_to_webdev(webdav_url, local_folder_path)
