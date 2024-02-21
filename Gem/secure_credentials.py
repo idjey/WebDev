@@ -4,6 +4,56 @@ import netrc
 
 NETRC_FILE = "_netrc"
 
+def get_credentials():
+    """Retrieves credentials from the _netrc file or prompts the user to enter them."""
+    netrc_path = os.path.join(os.path.expanduser("~"), NETRC_FILE)
+    
+    if not os.path.exists(netrc_path):
+        print("No _netrc file found. Creating one.")
+        try:
+            netrc_file = netrc.netrc(netrc_path)
+            username = input("Enter USERNAME: ")
+            labkey_auth_token = getpass.getpass("Enter LabKey Auth Token: ")
+            netrc_file.add_machine("https://hjf-bdw-stage.lkcompliant.net/", username=username, password=labkey_auth_token)
+            print("Credentials saved to _netrc file.")
+            return username, labkey_auth_token
+        except Exception as e:
+            print(f"Error creating _netrc file: {e}")
+            return None, None
+
+    try:
+        netrc_file = netrc.netrc(netrc_path)
+        username, _, labkey_auth_token = netrc_file.authenticators("https://hjf-bdw-stage.lkcompliant.net/")
+        if username:
+            print("Credentials already exist. Overwrite? (yes/no)")
+            overwrite = input().strip().lower()
+            if overwrite != 'yes':
+                return username, labkey_auth_token
+        new_username = input("Enter USERNAME: ")
+        new_labkey_auth_token = getpass.getpass("Enter LabKey Auth Token: ")
+        netrc_file.add_machine("https://hjf-bdw-stage.lkcompliant.net/", username=new_username, password=new_labkey_auth_token)
+        print("Credentials saved to _netrc file.")
+        return new_username, new_labkey_auth_token
+    except Exception as e:
+        print(f"Error retrieving or updating credentials from _netrc file: {e}")
+        return None, None
+
+if __name__ == "__main__":
+    username, labkey_auth_token = get_credentials()
+    if username:
+        print(f"Username: {username}")
+        print(f"LabKey Auth Token: {labkey_auth_token}")
+        print(f"Machine: {NETRC_FILE}")
+        print(f"Path: {os.path.join(os.path.expanduser('~'), NETRC_FILE)}")
+        print(f"File exists: {os.path.exists(os.path.join(os.path.expanduser('~'), NETRC_FILE))}")
+
+###############################
+import os
+import getpass
+import netrc
+
+NETRC_FILE = "_netrc"
+
 def check_and_set_netrc_file():
     """Checks if the _netrc file exists in the user's home directory, if not then creates it."""
     netrc_path = os.path.join(os.path.expanduser("~"), NETRC_FILE)
