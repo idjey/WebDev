@@ -58,6 +58,37 @@ def upload_to_webdev(webdav_url, local_folder_path, delay_seconds=60):
             finally:
                 sleep(delay_seconds)
 
+######################################
+def upload_to_webdev(webdav_url, local_folder_path, delay_seconds=60):
+    """Uploads modified files to WebDAV, with improved error handling and logging."""
+    username, password = get_credentials()
+    if not username or not password:
+        logger.error("Failed to get credentials for WebDAV upload.")
+        return
+    credentials = (username, password)
+    files = os.listdir(local_folder_path)
+    last_modified_times = {}
+    file_hashes = {}
+
+    for file_name in files:
+        file_path = os.path.join(local_folder_path, file_name)
+        if os.path.isfile(file_path) and file_changed(file_path, last_modified_times, file_hashes):
+            try:
+                with open(file_path, 'rb') as f:
+                    # Ensure the webdav_url ends with a slash to correctly concatenate with the file name
+                    if not webdav_url.endswith('/'):
+                        webdav_url += '/'
+                    upload_url = urljoin(webdav_url, os.path.basename(file_path))
+                    response = requests.put(upload_url, data=f, auth=credentials, verify=custom_certificate_path)
+                    response.raise_for_status()
+                    logger.info(f"Successfully uploaded {file_name}")
+            except requests.exceptions.RequestException as e:
+                logger.error(f"Failed to upload {file_name}. Error: {e}")
+            finally:
+                sleep(delay_seconds)
+
+######################################
+
 if __name__ == "__main__":
     try:
         webdav_url = "https://yourwebdav.url/_webdav/Transformed_Data/%40files/Test_Folder/"
