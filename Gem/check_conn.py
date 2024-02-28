@@ -3,30 +3,28 @@ import subprocess
 import logging
 from config_manager import ConfigManager
 
-custom_certificate_path = r'C:\Users\dkanjaria\Downloads\ZscalerRootCertificate-2048-SHA256.crt'
-
+# Specify the path to your custom certificate
+custom_certificate_path = r'C:\Users\ZscalerRootCertificate-2048-SHA256.crt'
 
 # Initialize logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-
 def check_webdav_connection(url):
-    """Check connectivity to the Webdev server."""
+    """Check connectivity to the WebDAV server using a custom certificate."""
     try:
-        response = requests.head(url)
+        # Include the custom certificate in the request for SSL verification
+        response = requests.head(url, verify=custom_certificate_path)
         # 200 OK or 401 Unauthorized indicates the URL is reachable
         if response.status_code in [200, 401]:
             logger.info(f"Connection to {url} successful.")
             return True
         else:
-            logger.error(f"Connection to {url} failed with status code: {
-                         response.status_code}.")
+            logger.error(f"Connection to {url} failed with status code: {response.status_code}.")
             return False
     except requests.exceptions.RequestException as e:
         logger.error(f"Failed to connect to {url}. Error: {e}")
         return False
-
 
 def run_main():
     """Run the main.py script."""
@@ -35,7 +33,6 @@ def run_main():
         logger.info("main.py executed successfully.")
     except subprocess.CalledProcessError as e:
         logger.error(f"main.py execution failed: {e}")
-
 
 if __name__ == "__main__":
     config = ConfigManager(default_config_path='config.json')
