@@ -1,11 +1,13 @@
 import logging
 import os
 from logging.handlers import RotatingFileHandler
-from config import config
-
+from config_manager import ConfigManager  # Assuming ConfigManager is the way configurations are managed
 
 def setup_logging():
-    log_directory = config.get('log_folder', '.')
+    # Load configuration using ConfigManager
+    config = ConfigManager(default_config_path='config.json').config
+    
+    log_directory = config.get('log_folder', '.')  # Use '.' as default if 'log_folder' is not set
     if not os.path.exists(log_directory):
         os.makedirs(log_directory)
     log_file_path = os.path.join(log_directory, 'application.log')
@@ -21,10 +23,13 @@ def setup_logging():
 
     # Create formatters and add it to handlers
     log_format = logging.Formatter(
-        '%(asctime)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
+        '%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
     file_handler.setFormatter(log_format)
     console_handler.setFormatter(log_format)
 
     # Add handlers to the logger
     logger.addHandler(file_handler)
     logger.addHandler(console_handler)
+
+    # Inform about logging setup completion
+    logger.info("Logging setup complete.")
