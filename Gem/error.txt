@@ -1,0 +1,14 @@
+Credentials saved to .netrc file.
+Credentials found in .netrc file.
+ERROR:webdev_utils:Failed to upload RV254_AdverseEvents.csv. Error: Invalid URL 'RV254_AdverseEvents.csv': No scheme supplied. Perhaps you meant https://RV254_AdverseEvents.csv?
+2024-02-28 10:33:04 - webdev_utils - ERROR - Failed to upload RV254_AdverseEvents.csv. Error: Invalid URL 'RV254_AdverseEvents.csv': No scheme supplied. Perhaps you meant https://RV254_AdverseEvents.csv?
+2024-02-28 10:33:04 - webdev_utils - ERROR - Failed to upload RV254_AdverseEvents.csv. Error: Invalid URL 'RV254_AdverseEvents.csv': No scheme supplied. Perhaps you meant https://RV254_AdverseEvents.csv?
+2024-02-28 10:33:04 - webdev_utils - ERROR - Failed to upload RV254_AdverseEvents.csv. Error: Invalid URL 'RV254_AdverseEvents.csv': No scheme supplied. Perhaps you meant https://RV254_AdverseEvents.csv?
+ERROR:webdev_utils:Failed to upload RV254_Chemistry.csv. Error: Invalid URL 'RV254_Chemistry.csv': No scheme supplied. Perhaps you meant https://RV254_Chemistry.csv?
+2024-02-28 10:34:04 - webdev_utils - ERROR - Failed to upload RV254_Chemistry.csv. Error: Invalid URL 'RV254_Chemistry.csv': No scheme supplied. Perhaps you meant https://RV254_Chemistry.csv?
+2024-02-28 10:34:04 - webdev_utils - ERROR - Failed to upload RV254_Chemistry.csv. Error: Invalid URL 'RV254_Chemistry.csv': No scheme supplied. Perhaps you meant https://RV254_Chemistry.csv?
+2024-02-28 10:34:04 - webdev_utils - ERROR - Failed to upload RV254_Chemistry.csv. Error: Invalid URL 'RV254_Chemistry.csv': No scheme supplied. Perhaps you meant https://RV254_Chemistry.csv?
+ERROR:webdev_utils:Failed to upload RV254_Demographics.csv. Error: Invalid URL 'RV254_Demographics.csv': No scheme supplied. Perhaps you meant https://RV254_Demographics.csv?
+2024-02-28 10:35:04 - webdev_utils - ERROR - Failed to upload RV254_Demographics.csv. Error: Invalid URL 'RV254_Demographics.csv': No scheme supplied. Perhaps you meant https://RV254_Demographics.csv?
+2024-02-28 10:35:04 - webdev_utils - ERROR - Failed to upload RV254_Demographics.csv. Error: Invalid URL 'RV254_Demographics.csv': No scheme supplied. Perhaps you meant https://RV254_Demographics.csv?
+2024-02-28 10:35:04 - webdev_utils - ERROR - Failed to upload RV254_Demographics.csv. Error: Invalid URL 'RV254_Demographics.csv': No scheme supplied. Perhaps you meant https://RV254_Demographics.csv?
