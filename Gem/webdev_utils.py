@@ -96,3 +96,41 @@ if __name__ == "__main__":
         upload_to_webdev(webdav_url, local_folder_path)
     except Exception as e:
         logger.error(f"Failed in main execution: {e}")
+
+
+######################################
+
+import requests
+from requests.auth import HTTPBasicAuth
+import logging
+from secure_credentials import get_credentials
+
+# Assuming this is the path to your custom certificate
+custom_certificate_path = r'C:\Users\ZscalerRootCertificate-2048-SHA256.crt'
+
+def upload_to_webdev(webdav_url, local_folder_path, delay_seconds=60):
+    username, password = get_credentials()
+    if not username or not password:
+        logging.error("Credentials not found or invalid.")
+        return
+    
+    # Use the custom certificate path and basic auth for requests
+    session = requests.Session()
+    session.verify = custom_certificate_path
+    session.auth = HTTPBasicAuth(username, password)
+
+    files = os.listdir(local_folder_path)
+    for file_name in files:
+        file_path = os.path.join(local_folder_path, file_name)
+        if os.path.isfile(file_path):
+            try:
+                with open(file_path, 'rb') as f:
+                    upload_url = webdav_url + file_name  # Ensure this is the correct URL construction
+                    response = session.put(upload_url, data=f)
+                    response.raise_for_status()
+                    logging.info(f"Successfully uploaded {file_name}")
+            except requests.exceptions.RequestException as e:
+                logging.error(f"Failed to upload {file_name}. Error: {e}")
+            finally:
+                time.sleep(delay_seconds)
+
