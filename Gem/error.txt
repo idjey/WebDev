@@ -1,14 +1,30 @@
-Credentials saved to .netrc file.
-Credentials found in .netrc file.
-ERROR:webdev_utils:Failed to upload RV254_AdverseEvents.csv. Error: Invalid URL 'RV254_AdverseEvents.csv': No scheme supplied. Perhaps you meant https://RV254_AdverseEvents.csv?
-2024-02-28 10:33:04 - webdev_utils - ERROR - Failed to upload RV254_AdverseEvents.csv. Error: Invalid URL 'RV254_AdverseEvents.csv': No scheme supplied. Perhaps you meant https://RV254_AdverseEvents.csv?
-2024-02-28 10:33:04 - webdev_utils - ERROR - Failed to upload RV254_AdverseEvents.csv. Error: Invalid URL 'RV254_AdverseEvents.csv': No scheme supplied. Perhaps you meant https://RV254_AdverseEvents.csv?
-2024-02-28 10:33:04 - webdev_utils - ERROR - Failed to upload RV254_AdverseEvents.csv. Error: Invalid URL 'RV254_AdverseEvents.csv': No scheme supplied. Perhaps you meant https://RV254_AdverseEvents.csv?
-ERROR:webdev_utils:Failed to upload RV254_Chemistry.csv. Error: Invalid URL 'RV254_Chemistry.csv': No scheme supplied. Perhaps you meant https://RV254_Chemistry.csv?
-2024-02-28 10:34:04 - webdev_utils - ERROR - Failed to upload RV254_Chemistry.csv. Error: Invalid URL 'RV254_Chemistry.csv': No scheme supplied. Perhaps you meant https://RV254_Chemistry.csv?
-2024-02-28 10:34:04 - webdev_utils - ERROR - Failed to upload RV254_Chemistry.csv. Error: Invalid URL 'RV254_Chemistry.csv': No scheme supplied. Perhaps you meant https://RV254_Chemistry.csv?
-2024-02-28 10:34:04 - webdev_utils - ERROR - Failed to upload RV254_Chemistry.csv. Error: Invalid URL 'RV254_Chemistry.csv': No scheme supplied. Perhaps you meant https://RV254_Chemistry.csv?
-ERROR:webdev_utils:Failed to upload RV254_Demographics.csv. Error: Invalid URL 'RV254_Demographics.csv': No scheme supplied. Perhaps you meant https://RV254_Demographics.csv?
-2024-02-28 10:35:04 - webdev_utils - ERROR - Failed to upload RV254_Demographics.csv. Error: Invalid URL 'RV254_Demographics.csv': No scheme supplied. Perhaps you meant https://RV254_Demographics.csv?
-2024-02-28 10:35:04 - webdev_utils - ERROR - Failed to upload RV254_Demographics.csv. Error: Invalid URL 'RV254_Demographics.csv': No scheme supplied. Perhaps you meant https://RV254_Demographics.csv?
-2024-02-28 10:35:04 - webdev_utils - ERROR - Failed to upload RV254_Demographics.csv. Error: Invalid URL 'RV254_Demographics.csv': No scheme supplied. Perhaps you meant https://RV254_Demographics.csv?
+C:\Users\dkanjaria\OneDrive - Henry M. Jackson Foundation for the Advancement of Military Medicine\Desktop\FOLDERS\SAS_TO_PYTHON\WebDevScript> py .\check_conn.py
+INFO:root:Loaded configuration from config.json
+INFO:__main__:Connection to https://hjf-bdw-stage.lkcompliant.net/_webdav/Transformed_Data/%40files/Test_Folder/ successful.
+INFO:root:Updated schedule_time to 11:37 in config.json
+INFO:root:Loaded configuration from config.json
+INFO:root:Loaded configuration from config.json
+INFO:root:Logging setup complete.
+2024-02-28 11:37:37 - root - INFO - Logging setup complete.
+INFO:root:Loaded configuration from config.json
+2024-02-28 11:37:37 - root - INFO - Loaded configuration from config.json
+INFO:root:Logging setup complete.
+2024-02-28 11:37:37 - root - INFO - Logging setup complete.
+2024-02-28 11:37:37 - root - INFO - Logging setup complete.
+INFO:root:Loaded configuration from config.json
+2024-02-28 11:37:37 - root - INFO - Loaded configuration from config.json
+2024-02-28 11:37:37 - root - INFO - Loaded configuration from config.json
+INFO:root:Logging setup complete.
+2024-02-28 11:37:37 - root - INFO - Logging setup complete.
+2024-02-28 11:37:37 - root - INFO - Logging setup complete.
+2024-02-28 11:37:37 - root - INFO - Logging setup complete.
+INFO:root:Loaded configuration from config.json
+2024-02-28 11:37:37 - root - INFO - Loaded configuration from config.json
+2024-02-28 11:37:37 - root - INFO - Loaded configuration from config.json
+2024-02-28 11:37:37 - root - INFO - Loaded configuration from config.json
+Uploading files to WebDev
+Credentials found in _netrc file.
+ERROR:webdev_utils:Failed to upload RV254_AdverseEvents.csv. Error: 401 Client Error:  for url: https://hjf-bdw-stage.lkcompliant.net/_webdav/Transformed_Data/%40files/Test_Folder/RV254_AdverseEvents.csv
+2024-02-28 11:37:45 - webdev_utils - ERROR - Failed to upload RV254_AdverseEvents.csv. Error: 401 Client Error:  for url: https://hjf-bdw-stage.lkcompliant.net/_webdav/Transformed_Data/%40files/Test_Folder/RV254_AdverseEvents.csv
+2024-02-28 11:37:45 - webdev_utils - ERROR - Failed to upload RV254_AdverseEvents.csv. Error: 401 Client Error:  for url: https://hjf-bdw-stage.lkcompliant.net/_webdav/Transformed_Data/%40files/Test_Folder/RV254_AdverseEvents.csv
+2024-02-28 11:37:45 - webdev_utils - ERROR - Failed to upload RV254_AdverseEvents.csv. Error: 401 Client Error:  for url: https://hjf-bdw-stage.lkcompliant.net/_webdav/Transformed_Data/%40files/Test_Folder/RV254_AdverseEvents.csv
